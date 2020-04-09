@@ -45,6 +45,7 @@ def get_lid_status():
     try:
         # Fetch the lid status from event
         retcode = subprocess.call(['evtest', '--query', event, 'EV_SW', 'SW_LID'])
+        retcode = int(retcode)
 
         print(retcode)
 
