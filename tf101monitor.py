@@ -16,7 +16,7 @@ class Tf101Server(dbus.service.Object):
 
     def SetLid(self, status):
         if self.lid_status != status:
-            print('Lid status changed to {}'.format('closed' if status else 'open')
+            print('Lid status changed to {}'.format('closed' if status else 'open'))
             self.LidChanged(status)
 
     # Emit a signal whenever the lid status changes
