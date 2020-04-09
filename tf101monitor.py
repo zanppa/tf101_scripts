@@ -16,6 +16,7 @@ class Tf101Server(dbus.service.Object):
 
     def SetLid(self, status):
         if self.lid_status != status:
+            print('Lid status changed to {}'.format('closed' if status else 'open')
             self.LidChanged(status)
 
     # Emit a signal whenever the lid status changes
@@ -44,8 +45,6 @@ def get_lid_status():
 
     # Fetch the lid status from event
     retcode = subprocess.call(['evtest', '--query', event, 'EV_SW', 'SW_LID'])
-
-    print('{:d}, {}'.format(retcode, retcode == 10))
 
     # Return code is 0 for closed lid, 10 for open
     if retcode == 0:
