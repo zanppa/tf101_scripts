@@ -16,7 +16,7 @@ class Tf101Server(dbus.service.Object):
 
     def SetLid(self, status):
         if self.lid_status != status:
-            LidChanged(status)
+            self.LidChanged(status)
 
     # Emit a signal whenever the lid status changes
     @dbus.service.signal('org.tf101', signature='q')
