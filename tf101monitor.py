@@ -26,7 +26,7 @@ class Tf101Server(dbus.service.Object):
     # Property handlers
     @dbus.service.method(dbus.PROPERTIES_IFACE, in_signature='ss', out_signature='q')
     def Get(self, iface_name, prop_name):
-        if iface_name == 'org.tf101':
+        if iface_name == 'org.tf101' or iface_name == '':
             if prop_name == 'LidIsClosed':
                 return self.lid_status
         else:
