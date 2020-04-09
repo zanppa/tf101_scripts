@@ -46,7 +46,7 @@ def get_lid_status():
         # Fetch the lid status from event
         retcode = subprocess.call(['evtest', '--query', event, 'EV_SW', 'SW_LID'])
 
-        print(retcode)
+        print('{:d}, {}'.format(retcode, retcode == 10))
 
         # Return code is 0 for closed lid, 10 for open
         if retcode == 0:
@@ -54,7 +54,7 @@ def get_lid_status():
         elif retcode == 10:
             tf101.SetLid(1)
         else:
-            print('Error in reading lid status')
+            print('Error in reading lid status: unknown return code')
 
     except:
         print('Error in reading lid status')
