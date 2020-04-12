@@ -34,6 +34,7 @@ def handle_lidclose(*args):
         print "lid is open, enabling the touchscreen"
         os.system('xinput set-int-prop '+KBDEV+' "Device Enabled" 8 1')
         os.system('xinput set-int-prop '+SCRDEV+' "Device Enabled" 8 1')
+        os.system('sudo chvt 1 && sudo chvt 7')
 
 def main():
     global pow_prop_iface, pow_iface
