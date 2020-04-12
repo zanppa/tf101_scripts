@@ -1,5 +1,5 @@
 # tf101_scripts
-Scripts for Asus EEE Pad Transformer TF101, runnin [DjDill's Lubuntu 14.04](https://forum.xda-developers.com/showthread.php?t=2648862) and [jrohwer's Rootbind kernel](https://forum.xda-developers.com/showthread.php?t=2347581).
+Scripts for Asus EEE Pad Transformer TF101, running [DjDill's Lubuntu 14.04](https://forum.xda-developers.com/showthread.php?t=2648862) and [jrohwer's Rootbind kernel](https://forum.xda-developers.com/showthread.php?t=2347581).
 
 ## tf101monitor.py
 This script should be run as root. It currently monitors the lid status and exports it over DBUS.
@@ -41,3 +41,12 @@ For the fixlidclose blank screen hack to work, `/etc/sudoers` must contain
 # allow chvt to work around blank screen
 tf101 ALL=(ALL) NOPASSWD: /bin/chvt
 ```
+
+## dpms_detector.py
+This script is intended to run on background and run a command when the system returns from DPMS suspend state, i.e. from blank screen. There is some bug (in X?) which leaves the screen blank even though the backlight comes on, and only changing virtual terminal brings the picture back. This automates the task, and allows returning from DPMS suspend even without keyboard.
+
+Script should be run with
+```
+python dpms_detector.py --display ":0" --command_on "sudo chvt 1 && sudo chvt 7"
+```
+sudoers should be modified like above.
