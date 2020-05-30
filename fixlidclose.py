@@ -26,7 +26,7 @@ def handle_lidclose(*args):
                                 'LidIsClosed')
     if closed:
         print "lid is closed, disabling the touchscreen"
-        os.system('xdg-screensaver lock')
+#        os.system('xdg-screensaver lock')
         os.system('xset dpms force off')
         os.system('xinput set-int-prop '+KBDEV+' "Device Enabled" 8 0')
         os.system('xinput set-int-prop '+SCRDEV+' "Device Enabled" 8 0')
@@ -34,7 +34,8 @@ def handle_lidclose(*args):
         print "lid is open, enabling the touchscreen"
         os.system('xinput set-int-prop '+KBDEV+' "Device Enabled" 8 1')
         os.system('xinput set-int-prop '+SCRDEV+' "Device Enabled" 8 1')
-        os.system('sudo chvt 1 && sudo chvt 7')
+        os.system('xset dpms force on')
+        # os.system('sudo chvt 1 && sudo chvt 7') # This is now handled by other scipt
 
 def main():
     global pow_prop_iface, pow_iface

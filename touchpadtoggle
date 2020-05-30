@@ -1,0 +1,17 @@
+#!/bin/bash
+
+declare -i ID
+ID=`xinput list | grep -Eo 'elantech_touchscreen\s*id\=[0-9]{1,2}'|grep -Eo '[0-9]{1,2}'`
+
+declare -i STATE
+STATE=`xinput list-props $ID|grep 'Device Enabled'|awk '{print $4}'`
+if [ $STATE -eq 1 ]
+then
+    xinput set-prop $ID "Device Enabled" 0
+    echo "Touchpad disabled."
+    notify-send -i dialog-information 'Touchpad Toggle' 'Touchpad disabled.'
+else
+    xinput set-prop $ID "Device Enabled" 1
+    echo "Touchpad enabled."
+    notify-send -i dialog-information 'Touchpad Toggle' 'Touchpad enabled.'
+fi

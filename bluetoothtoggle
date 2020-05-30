@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BT_STATUS=$(cat /sys/devices/platform/bcm4329_rfkill/rfkill/rfkill0/state)
+
+if [ "$BT_STATUS" == "1" ]; then
+	sudo rfkill block 0
+	notify-send -i dialog-information 'Bluetooth Toggle' 'Bluetooth switched off.'
+	echo  "Bluetooth off"
+elif [ "$BT_STATUS" == "0" ]; then
+	sudo rfkill unblock 0
+	notify-send -i dialog-information 'Bluetooth Toggle' 'Bluetooth switched on.'
+	echo  "Bluetooth on"
+fi

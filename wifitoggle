@@ -1,0 +1,13 @@
+#!/bin/bash
+
+WIFI_STATUS=$(ifconfig | grep 04:46:65:a4:63:62)
+
+if [ -n "$WIFI_STATUS" ]; then
+	/usr/bin/nmcli nm wifi off
+	notify-send -i dialog-information 'WiFi Toggle' 'WiFi switched off.'
+	echo  "Wifi off"
+else
+	/usr/bin/nmcli nm wifi on
+	echo "Wifi on"
+	notify-send -i dialog-information 'WiFi Toggle' 'WiFi switched on.'
+fi

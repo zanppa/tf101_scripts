@@ -1,0 +1,17 @@
+#!/bin/bash
+
+declare -i ID
+ID=7
+
+declare -i STATE
+STATE=`xinput list-props $ID|grep 'Device Enabled'|awk '{print $4}'`
+if [ $STATE -eq 1 ]
+then
+    xinput set-prop $ID "Device Enabled" 0
+    echo "Touchscreen disabled."
+    notify-send -i dialog-information 'Touchscreen Toggle' 'Touchscreen disabled.'
+else
+    xinput set-prop $ID "Device Enabled" 1
+    echo "Touchscreen enabled."
+    notify-send -i dialog-information 'Touchscreen Toggle' 'Touchscreen enabled.'
+fi
