@@ -10,9 +10,9 @@ python /usr/local/bin/tf101monitor.py &
 ```
 
 ## fixlidclose.py
-This is a modified script to shut down screen, toggel off touchpad and touchscreen (and/or keyboard). This version monitors the DBUS variables of the tf101monitor.py.
+This is a modified script to shut down screen, toggle off touchpad and touchscreen (and/or keyboard). This version monitors the DBUS variables of the tf101monitor.py.
 
-There is also a hack to work around blank screen when opening the lid.
+There is also a hack to work around blank screen when opening the lid. This was only necessary with newer Xorg which used Nouveau drivers (because the Tegra driver was no longer supported), and the feature is now removed.
 
 The original script is from [DjDill's Lubuntu 14.04](https://forum.xda-developers.com/showthread.php?t=2648862).
 
@@ -43,6 +43,8 @@ tf101 ALL=(ALL) NOPASSWD: /bin/chvt
 ```
 
 ## dpms_detector.py
+This script is not needed if Tegra drivers are used (instead of Nouveau), i.e. old enough Xorg.
+
 This script is intended to run on background and run a command when the system returns from DPMS suspend state, i.e. from blank screen. There is some bug (in X?) which leaves the screen blank even though the backlight comes on, and only changing virtual terminal brings the picture back. This automates the task, and allows returning from DPMS suspend even without keyboard.
 
 Script should be run with
@@ -50,3 +52,9 @@ Script should be run with
 python dpms_detector.py --display ":0" --command_on "sudo chvt 1 && sudo chvt 7"
 ```
 sudoers should be modified like above.
+
+
+## rotate_screen.sh
+This script can be used to rotate screen & touch screen & other mice.
+
+In my set-up this is bind to ctrl+shift+arrows.
